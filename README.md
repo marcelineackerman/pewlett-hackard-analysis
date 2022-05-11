@@ -21,6 +21,7 @@ An analysis of employee data for the company Pewlett-Hackard in order to predict
 
 
 - The last finding concerns the difference between mentorship-eligible employees and potential retirees. There are a number of employees eligible, and could have a head start in preserving the institutional knowledge of the staff leaving.
+
 ![image](https://user-images.githubusercontent.com/100869713/167923316-fc4de7f9-9b4c-4d48-a7ec-c737f1f1b6f5.png)
 
 
@@ -39,6 +40,8 @@ SELECT COUNT(DISTINCT emp_no) FROM employees;
 ![image](https://user-images.githubusercontent.com/100869713/167919532-f55c8040-2a82-45ed-a4f6-211ef6eac857.png)
 
 This is a massive **24%** decrease in workforce over the next few years as these employees retire.
+
+And unfortunately, the mentorship program may not be sufficient to replace this loss:
 
 Utilizing another COUNT query, we can see that there are roughly **1,549** employees eligible for mentoring. With over 70,000 employees leaving, this means only **2%** of retirees would be able to stay on, if they agreed to become mentors. This means potential mentors must be chosen very carefully from senior staff.
 
@@ -75,3 +78,5 @@ SELECT COUNT(emp_no) FROM mentorship_eligibility_two;
 ![image](https://user-images.githubusercontent.com/100869713/167924480-e7d66791-c788-43dc-ad27-5311e822689c.png)
 
 Unfortunately, there do not seem to be any employees born *after* 1965 within the company structure at all. This could spell disaster over the next few decades as more and more employees retire. Pewlett-Hackard must consider hiring a younger workforce, both to mitigate possible disaster and to keep up with the competitive job market.
+
+Otherwise, **there are nowhere near enough employees** to fill in the gap of retirees on the horizon.
