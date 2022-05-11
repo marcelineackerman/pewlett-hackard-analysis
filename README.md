@@ -4,6 +4,10 @@
 
 An analysis of employee data for the company Pewlett-Hackard in order to predict and prepare for the upcoming wave of retirees, using PostgreSQL.
 
+## Resouces
+
+ - PostgreSQL 11, pgAdmin 4
+
 ## Results and Findings
 
  - The most immediate and urgent finding is that a truly massive amount of employees are on the verge of retirement.
@@ -44,3 +48,30 @@ SELECT COUNT(emp_no) FROM mentorship_eligibility;
 ![image](https://user-images.githubusercontent.com/100869713/167920798-22e789f9-fcca-490c-8238-7040c76ddadd.png)
 
 This is obviously nowhere near enough to replace the upcoming loss of workforce. The original mentorship query was for employees born in the year 1965. If we increase that range, and make even younger employees eligible for mentorship, we may have more success in filling these senior leadership roles over time.
+
+```
+SELECT DISTINCT ON (e.emp_no) e.emp_no,
+	e.first_name,
+	e.last_name,
+	e.birth_date,
+	de.from_date,
+	de.to_date,
+	ti.title
+INTO mentorship_eligibility_two
+FROM employees as e
+	INNER JOIN dept_emp as de
+		ON (e.emp_no = de.emp_no)
+	INNER JOIN titles as ti
+		ON (e.emp_no = ti.emp_no)
+	WHERE (de.to_date = '9999-01-01')
+	AND (e.birth_date BETWEEN '1965-01-01' AND '1990-12-31')
+ORDER BY e.emp_no ASC
+```
+![image](https://user-images.githubusercontent.com/100869713/167924457-ed2903e8-0be6-46e3-bf9b-7648aa0143fc.png)
+
+```
+SELECT COUNT(emp_no) FROM mentorship_eligibility_two;
+```
+![image](https://user-images.githubusercontent.com/100869713/167924480-e7d66791-c788-43dc-ad27-5311e822689c.png)
+
+Unfortunately, there do not seem to be any employees born *after* 1965 within the company structure at all. This could spell disaster over the next few decades as more and more employees retire. Pewlett-Hackard must consider hiring a younger workforce, both to mitigate possible disaster and to keep up with the competitive job market.
